@@ -1,32 +1,20 @@
 #include <iostream>
-#include <cstdlib>
-#include <string>
-#include <limits>
+#include <chrono>
+#include <memory>
+#include "PiCalculator.h" // Only include the "Menu"
 
-auto square = [](auto x) { return x * x; };
+int main() {
+    std::unique_ptr<PiCalculator> calculator = std::make_unique<MonteCarloPiCalculator>();
 
-//Calculate pi via monte carlo method. Generate pair of random values between 0 and 1
-float calculate_pi(const int tries) {
+    auto start = std::chrono::high_resolution_clock::now();
+    float pi_approx = calculator->calculate_pi_approx(INT32_MAX);
 
+    auto end = std::chrono::high_resolution_clock::now();
+    const std::chrono::duration<double> delta = end - start;
 
-
-    int in = 0;
-    int out = 0;
-
-    for (int i = 0; i < tries; i++) {
-        float x = rand() / static_cast<float>(RAND_MAX);
-        float y = rand() / static_cast<float>(RAND_MAX);
-        if ((square(x) + square(y)) <= 1) {
-            in += 1;
-        }else {
-            out += 1;
-        }
-
-    }
-
-    return 4.00f*(static_cast<float>(in)/(out+in));
+    std::cout << "Pi: " << pi_approx << " (Time: " << delta.count() << "s)" << std::endl;
+    return 0;
 }
-
 
 int get_user_int_input() {
     int user_input;
@@ -44,11 +32,4 @@ int get_user_int_input() {
         }
     }
 }
-
-int main() {
-    const auto pi_approx = calculate_pi(get_user_int_input());
-    std::cout << pi_approx << std::endl;
-    return 0;
-}
-
 
