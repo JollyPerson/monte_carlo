@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(monte_carlo main.cpp
         PiCalculator.h
         MonteCarloPiCalculator.cpp
-        RawMontePiCalculator.cpp)
+        RawMontePiCalculator.cpp
+        FastRandomMontePiCalculator.cpp)

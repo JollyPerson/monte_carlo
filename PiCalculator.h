@@ -17,4 +17,9 @@ public:
     float calculate_pi_approx(int tries) override;
 };
 
+class FastRandomMontePiCalculator : public PiCalculator {
+public:
+    float calculate_pi_approx(int tries) override;
+};
+
 #endif

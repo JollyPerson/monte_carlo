@@ -6,7 +6,7 @@
 static auto square = [](auto x) { return x * x; };
 
 int main() {
-    std::unique_ptr<PiCalculator> calculator = std::make_unique<RawMontePiCalculator>();
+    std::unique_ptr<PiCalculator> calculator = std::make_unique<FastRandomMontePiCalculator>();
 
     auto start = std::chrono::high_resolution_clock::now();
     float pi_approx = calculator->calculate_pi_approx(INT32_MAX);
