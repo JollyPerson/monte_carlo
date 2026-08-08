@@ -3,13 +3,18 @@
 
 class PiCalculator {
 public:
-    virtual float calculate_pi_approx(const int tries) = 0;
+    virtual float calculate_pi_approx(int tries) = 0;
     virtual ~PiCalculator() = default;
 };
 
 class MonteCarloPiCalculator : public PiCalculator {
 public:
-    float calculate_pi_approx(const int tries) override;
+    float calculate_pi_approx(int tries) override;
+};
+
+class RawMontePiCalculator : public PiCalculator {
+public:
+    float calculate_pi_approx(int tries) override;
 };
 
 #endif

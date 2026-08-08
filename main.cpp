@@ -3,8 +3,10 @@
 #include <memory>
 #include "PiCalculator.h" // Only include the "Menu"
 
+static auto square = [](auto x) { return x * x; };
+
 int main() {
-    std::unique_ptr<PiCalculator> calculator = std::make_unique<MonteCarloPiCalculator>();
+    std::unique_ptr<PiCalculator> calculator = std::make_unique<RawMontePiCalculator>();
 
     auto start = std::chrono::high_resolution_clock::now();
     float pi_approx = calculator->calculate_pi_approx(INT32_MAX);
