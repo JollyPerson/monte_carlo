@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <limits>
 
 auto square = [](auto x) { return x * x; };
 
@@ -27,13 +28,27 @@ float calculate_pi(const int tries) {
 }
 
 
-int main() {
-    int tries;
-    std::cout << "Enter number of tries: ";
-    std::cin >> tries;
+int get_user_int_input() {
+    int user_input;
+    while (true) {
+        std::cout << "Enter an integer number of tries: ";
+        std::cin >> user_input;
 
-    const auto pi_approx = calculate_pi(tries);
+        if (std::cin.fail()) {
+            std::cerr << "Invalid input." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            return user_input;
+        }
+    }
+}
+
+int main() {
+    const auto pi_approx = calculate_pi(get_user_int_input());
     std::cout << pi_approx << std::endl;
     return 0;
 }
+
 
